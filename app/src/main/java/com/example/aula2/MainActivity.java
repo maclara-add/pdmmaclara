@@ -1,6 +1,7 @@
 package com.example.aula2;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +22,48 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("Ciclo_vida", "OnStart");
+        Log.wtf("Ciclo_vida", "OnStart");;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Ciclo_vida", "OnRestart");
+        Log.wtf("Ciclo_vida", "OnRestart");;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("Ciclo_vida", "OnResume");
+        Log.wtf("Ciclo_vida", "OnResume");;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("Ciclo_vida", "OnPause");
+        Log.wtf("Ciclo_vida", "OnPause");;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("Ciclo_vida", "OnStop");
+        Log.wtf("Ciclo_vida", "OnStop");;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("Ciclo_vida", "OnDestroy");
+        Log.wtf("Ciclo_vida", "OnDestroy");;
+
+    }
+
 }
