@@ -19,12 +19,11 @@ public class tabuadaresultado extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             double tabuada = bundle.getDouble("tabuada");
-
-            StringBuilder resultado = new StringBuilder();
+            double resultado = 0;
             for (int i = 0; i <= 10; i++) {
-                resultado.append(tabuada).append("n").append(i).append("=").append(tabuada *i);
+                resultado = tabuada*i;
             }
-            edResultado.setText(resultado.toString());
+            edResultado.setText((int) resultado);
         }
     }
 }
