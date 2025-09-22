@@ -22,7 +22,7 @@ public class tabuadaresultado extends AppCompatActivity {
 
             StringBuilder resultado = new StringBuilder();
             for (int i = 0; i <= 10; i++) {
-                resultado.append(tabuada).append(" x ").append(i).append(" = ").append(tabuada * i).append("\n");
+                resultado.append(tabuada).append("n").append(i).append("=").append(tabuada *i);
             }
             edResultado.setText(resultado.toString());
         }
