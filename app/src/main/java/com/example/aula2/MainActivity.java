@@ -8,51 +8,36 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
-    TextView  textView;
 
-    int contador;
+public class MainActivity extends AppCompatActivity {
 
     Button button;
-    EditText editTextMin, getEditTextMin;
-
+    EditText editTextmin, editTextmax;
     TextView tv;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.tv), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
-        button=findViewById(R.id.button);
-        editTextMin = findViewById(R.id.edMin);
-        getEditTextMax = findViewById(R.id.edMax);
-        tv = findViewById(R.id.tv);
-
+        Log.d("Ciclo_vida", "onCreate");
+        button =findViewById(R.id.button);
+        editTextmax =findViewById(R.id.edMax);
+        editTextmin =findViewById(R.id.edMin);
+        tv =findViewById(R.id.tvResultado);
         button.setOnClickListener(v -> {
             Random random = new Random();
+
             int min, max;
+            min = Integer.parseInt(editTextmin.getText().toString());
+            max = Integer.parseInt(editTextmax.getText().toString());
 
-            min=Integer.parseInt(editTextMin.getText().toString());
-            max=Integer.parseInt(editTextMax.getText().toString());
             int delta = max-min;
-
-            int sorteado = random.nextInt();
-
+            int sorteado = random.nextInt(delta)+min;
             tv.setText(Integer.toString(sorteado));
-
         });
 
     }
@@ -60,43 +45,37 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("Ciclo_vida", "OnStar");
-        Log.wtf("Ciclo_vida", "OnStar");
+        Log.d("Ciclo_vida", "osStart");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("Ciclo_vida", "OnResume");
-        Log.wtf("Ciclo_vida", "OnResume");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d("Ciclo_vida", "OnRestart");
-        Log.wtf("Ciclo_vida", "OnRestart");
+        Log.d("Ciclo_vida", "osResume");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("Ciclo_vida", "OnPause");
-        Log.wtf("Ciclo_vida", "OnPause");
+        Log.d("Ciclo_vida", "osPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("Ciclo_vida", "OnStop");
-        Log.wtf("Ciclo_vida", "OnStop");
+        Log.d("Ciclo_vida", "osStop");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("Ciclo_vida", "osRestart");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d("Cicli_vida", "OnDestroy");
-        Log.wtf("Ciclo_vida", "OnDestroy");
+        Log.d("Ciclo_vida", "osDestroy");
     }
 
 
