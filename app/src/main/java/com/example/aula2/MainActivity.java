@@ -1,6 +1,10 @@
 package com.example.aula2;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,11 +14,30 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button button;
+    EditText edTabuada;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        button=findViewById(R.id.button2);
+        edTabuada=findViewById(R.id.edTabuada);
+
+        button.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, tabuadaresultado.class);
+            Bundle bundle = new Bundle();
+
+            Double tabuada = Double.parseDouble(edTabuada.getText().toString());
+            bundle.putDouble("tabuada",tabuada);
+
+            intent.putExtras(bundle);
+            startActivity(intent);
+        });
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
