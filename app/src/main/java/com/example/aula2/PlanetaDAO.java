@@ -17,4 +17,8 @@ public class PlanetaDAO {
         arrayListPlanetas.add(new Planeta( "Urano", R.drawable.uranus));
         arrayListPlanetas.add(new Planeta( "Netuno", R.drawable.neptune));
     }
+
+    public ArrayList<Planeta> getPlanetas(){
+        return arrayListPlanetas;
+    }
 }
