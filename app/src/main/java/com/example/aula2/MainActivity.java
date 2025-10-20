@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText editText;
     ArrayList<String> nomes ;
+    PlanetaController planetaController;
 
 
     @Override
@@ -32,13 +33,13 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.listView);
         bEntrar = findViewById(R.id.bottEntrar);
         editText = findViewById(R.id.editTextText);
-
-
-        nomes = new ArrayList<String>();
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nomes);
-
+        planetaController = new PlanetaController();
+        PlanetaAdapter adapter = new PlanetaAdapter(this,
+                R.layout.item_lista,
+                planetaController.getPlaneta());
         listView.setAdapter(adapter);
+
+
         bEntrar.setOnClickListener(( view) -> {
             nomes.add(editText.getText().toString());
             adapter.notifyDataSetChanged();
