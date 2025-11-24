@@ -1,95 +1,66 @@
 package com.example.aula2;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.aula2.R;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     Button button;
-    EditText editTextmin, editTextmax;
-    TextView tv;
+    TextView tvResultados;
+    EditText edMin, edMax;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        Log.d("Ciclo_vida", "onCreate");
+        // Inicializando as Views
+        edMin = findViewById(R.id.edMin);  // Campo para o valor mínimo
+        edMax = findViewById(R.id.edMax);  // Campo para o valor máximo
+        tvResultados = findViewById(R.id.tvResultados); // TextView onde mostra o resultado
+        button = findViewById(R.id.button); // Botão para realizar o sorteio
 
-        button = findViewById(R.id.button);
-        editTextmax = findViewById(R.id.edMax);
-        editTextmin = findViewById(R.id.edMin);
-        tv = findViewById(R.id.tvResultado);
+        // Configurando o clique do botão
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Tenta obter os valores inseridos
+                String minText = edMin.getText().toString();
+                String maxText = edMax.getText().toString();
 
-        button.setOnClickListener(v -> {
-            String minStr = editTextmin.getText().toString();
-            String maxStr = editTextmax.getText().toString();
+                // Verificar se os campos não estão vazios
+                if (minText.isEmpty() || maxText.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Por favor, preencha os dois intervalos.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-            // Verifica se os campos estão vazios
-            if (minStr.isEmpty() || maxStr.isEmpty()) {
-                tv.setText("Digite os dois números!");
-                return;
+                // Converter os valores dos campos EditText para inteiros
+                int minValue = Integer.parseInt(minText);
+                int maxValue = Integer.parseInt(maxText);
+
+                // Validar se o valor mínimo é menor que o valor máximo
+                if (minValue >= maxValue) {
+                    Toast.makeText(MainActivity.this, "O valor mínimo deve ser menor que o máximo.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Sorteio de número aleatório dentro do intervalo
+                Random random = new Random();
+                int sorteado = random.nextInt(maxValue - minValue + 1) + minValue; // Garante que o número esteja entre minValue e maxValue
+
+                // Mostrar o número sorteado no TextView
+                tvResultados.setText(String.valueOf(sorteado));
             }
-
-            int min = Integer.parseInt(minStr);
-            int max = Integer.parseInt(maxStr);
-
-            // Verifica se min é maior que max
-            if (min > max) {
-                tv.setText("O mínimo não pode ser maior que o máximo!");
-                return;
-            }
-
-            Random random = new Random();
-            int delta = max - min + 1; // +1 para incluir o máximo
-            int sorteado = random.nextInt(delta) + min;
-
-            tv.setText("Número sorteado: " + sorteado);
         });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("Ciclo_vida", "onStart");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("Ciclo_vida", "onResume");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d("Ciclo_vida", "onPause");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("Ciclo_vida", "onStop");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d("Ciclo_vida", "onRestart");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("Ciclo_vida", "onDestroy");
     }
 }
