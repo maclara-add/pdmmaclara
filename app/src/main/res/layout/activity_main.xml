@@ -40,8 +40,7 @@
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/edMin"
-        tools:layout_editor_absoluteY="179dp" />
+        app:layout_constraintStart_toEndOf="@+id/edMin" />
 
     <Button
         android:id="@+id/button"
