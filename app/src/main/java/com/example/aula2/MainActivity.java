@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             textView = findViewById(R.id.tv);
             textView.setText(Integer.toString(contador));
             textView.setOnClickListener(v1 ->{
-                contador++;
+                contador++; // a cada clique, conta +1
                 textView.setText(Integer.toString(contador));
             });
 
