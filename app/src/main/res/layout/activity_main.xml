@@ -8,32 +8,38 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textViewX"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="@string/ola"
+        android:textColor="#F44336"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewY"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="147dp" />
+
+    <TextView
+        android:id="@+id/textViewZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ola"
+        android:textColor="#F44336"
+        android:textSize="60sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewY"
+        tools:layout_editor_absoluteX="149dp"
+        tools:ignore="MissingConstraints" />
 
-    <EditText
-        android:id="@+id/editTextText"
+    <TextView
+        android:id="@+id/textViewY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="188dp" />
-
-    <EditText
-        android:id="@+id/editTextText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        tools:layout_editor_absoluteX="209dp"
-        tools:layout_editor_absoluteY="188dp" />
+        android:text="@string/ola"
+        android:textColor="#F44336"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewZ"
+        app:layout_constraintTop_toBottomOf="@+id/textViewX"
+        tools:layout_editor_absoluteX="149dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
