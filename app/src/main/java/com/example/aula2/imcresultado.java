@@ -1,73 +1,62 @@
 package com.example.aula2;
 
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class imcresultado extends AppCompatActivity {
-
-    private TextView resultTextView;
-    private TextView classificationTextView;
-    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);  // Ativar o modo EdgeToEdge para usar barras de sistema
+
+        // Carrega o layout da tela de resultados do IMC
         setContentView(R.layout.activity_imcresultado);
 
-        // Configurar a aplicação dos Insets
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom); // Definir o padding para ajustar ao sistema
-            return insets;
-        });
+        // Recupera os dados enviados pela Intent
+        Bundle bundle = getIntent().getExtras();
 
-        // Inicializar os componentes da tela
-        resultTextView = findViewById(R.id.resultTextView);
-        classificationTextView = findViewById(R.id.classificationTextView);
-        backButton = findViewById(R.id.backButton);
+        // Pega os valores de peso e altura
+        Double peso = bundle.getDouble("peso"); // Peso em kg
+        Double altura = bundle.getDouble("altura"); // Altura em metros
 
-        // Obter os dados passados pela MainActivity
-        double peso = getIntent().getDoubleExtra("peso", 0);
-        double altura = getIntent().getDoubleExtra("altura", 0);
+        // Calcula o IMC usando a fórmula
+        Double imc = (peso / (altura * altura));
 
-        // Calcular o IMC
-        double imc = calcularIMC(peso, altura);
+        // Liga as variáveis aos componentes da tela
+        TextView tvIMC = findViewById(R.id.textViewIMC); // Mostra o IMC
+        TextView tvaltura = findViewById(R.id.tvAlturaResult); // Mostra a altura
+        TextView tvpeso = findViewById(R.id.tvpesoResult); // Mostra o peso
+        TextView tvDescricao = findViewById(R.id.textViewDescricaoIMC); // Mostra a descrição do IMC
+        ImageView imageView = findViewById(R.id.imageViewPerfil); // Mostra a imagem correspondente
 
-        // Exibir o IMC e a classificação
-        resultTextView.setText(String.format("IMC: %.2f", imc));
-        classificationTextView.setText(getClassification(imc));
+        // Exibe os valores formatados nos TextViews
+        tvIMC.setText(String.format("%.2f", imc) + " kg/m²");
+        tvaltura.setText(String.format("%.2f", altura) + " m");
+        tvpeso.setText(String.format("%.2f", peso) + " kg");
 
-        // Definir a ação do botão de voltar
-        backButton.setOnClickListener(v -> finish()); // Voltar à tela anterior
-    }
-
-    // Método para calcular o IMC
-    private double calcularIMC(double peso, double altura) {
-        return peso / (altura * altura);
-    }
-
-    // Método para determinar a classificação com base no IMC
-    private String getClassification(double imc) {
-        if (imc < 18.5) {
-            return "Classificação: Abaixo do peso";
-        } else if (imc < 24.9) {
-            return "Classificação: Peso normal";
-        } else if (imc < 29.9) {
-            return "Classificação: Sobrepeso";
-        } else if (imc < 34.9) {
-            return "Classificação: Obesidade grau 1";
-        } else if (imc < 39.9) {
-            return "Classificação: Obesidade grau 2";
-        } else {
-            return "Classificação: Obesidade grau 3";
+        // Verifica em qual faixa está o IMC e define descrição e imagem
+        if (imc < 18.5) { // Se o IMC for menor que 18.5
+            tvDescricao.setText("Abaixo do peso");
+            imageView.setImageResource(R.drawable.abaixopeso);
+        } else if (imc >= 18.5 && imc <= 24.9) { // Se IMC estiver no intervalo normal
+            tvDescricao.setText("Peso normal");
+            imageView.setImageResource(R.drawable.normal);
+        } else if (imc >= 25 && imc <= 29.9) { // Se IMC estiver na faixa de sobrepeso
+            tvDescricao.setText("Sobrepeso");
+            imageView.setImageResource(R.drawable.sobrepeso);
+        } else if (imc >= 30 && imc <= 34.9) { // Se IMC for obesidade grau 1
+            tvDescricao.setText("Obesidade grau 1");
+            imageView.setImageResource(R.drawable.obesidade1);
+        } else if (imc >= 35 && imc <= 39.9) { // Se IMC for obesidade grau 2
+            tvDescricao.setText("Obesidade grau 2");
+            imageView.setImageResource(R.drawable.obesidade2);
+        } else { // Se não entrar em nenhuma das condições acima, é obesidade grau 3
+            tvDescricao.setText("Obesidade grau 3");
+            imageView.setImageResource(R.drawable.obesidade3);
         }
+
     }
 }
