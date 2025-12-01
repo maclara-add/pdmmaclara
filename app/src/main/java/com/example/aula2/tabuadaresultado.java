@@ -1,29 +1,37 @@
 package com.example.aula2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class tabuadaresultado extends AppCompatActivity {
 
-    private TextView edResultado;
+    TextView tvTab, tvResult; // Componentes que mostram o título e o resultado da tabuada
+    String resultado = ""; // Variável que acumula todas as linhas da tabuada
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_tela2);
 
-        edResultado = findViewById(R.id.edResultado);
+        // Recupera o número enviado pela tela anterior
+        Intent i = getIntent();
+        Bundle b = i.getExtras();
+        int num = b.getInt("num");
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle != null) {
-            double tabuada = bundle.getDouble("tabuada");
-            double resultado = 0;
-            for (int i = 0; i <= 10; i++) {
-                resultado = tabuada*i;
-            }
-            edResultado.setText((int) resultado);
+        tvTab = findViewById(R.id.tvTabuada);
+        tvResult = findViewById(R.id.tvResultado);
+
+        tvTab.setText("Tabuada do " + num);
+
+        // Gera a tabuada do número recebido (0 até 10)
+        for (int a = 0; a < 11; a++) {
+            resultado = resultado + a + " x " + num + " = " + (a * num) + "\n";
+            tvResult.setText(resultado); // Atualiza o TextView com a tabuada
         }
     }
 }
