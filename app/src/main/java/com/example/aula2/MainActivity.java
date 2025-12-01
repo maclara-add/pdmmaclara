@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.aula2.R;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener{
+
+    //declaracao das variaveis
     int i=0;
     SensorManager mSensorManager;
     Sensor sensor;
@@ -20,14 +22,16 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); // variaveis
         tx =findViewById(R.id.textViewX);
         ty =findViewById(R.id.textViewY);
         tz =findViewById(R.id.textViewZ);
 
+    // obtem o sensor manager
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        // sensor=mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
 
-//        sensor=mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        //acessando o acelerometro
         sensor=mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         mSensorManager.registerListener(this,sensor,SensorManager.SENSOR_DELAY_NORMAL);
