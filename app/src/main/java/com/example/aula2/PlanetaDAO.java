@@ -4,21 +4,36 @@ import java.util.ArrayList;
 
 public class PlanetaDAO {
 
-    ArrayList<Planeta> arrayListPlanetas;
+    // Lista que vai guardar todos os planetas
+    private ArrayList<Planeta> planetas;
 
-    public PlanetaDAO(){
-        arrayListPlanetas = new ArrayList<Planeta>();
-        arrayListPlanetas.add(new Planeta( "Mercúrio", R.drawable.mercury));
-        arrayListPlanetas.add(new Planeta( "Vênus", R.drawable.venus));
-        arrayListPlanetas.add(new Planeta( "Terra", R.drawable.earth));
-        arrayListPlanetas.add(new Planeta( "Marte", R.drawable.mars));
-        arrayListPlanetas.add(new Planeta( "Júpiter", R.drawable.jupter));
-        arrayListPlanetas.add(new Planeta( "Saturno", R.drawable.saturn));
-        arrayListPlanetas.add(new Planeta( "Urano", R.drawable.uranus));
-        arrayListPlanetas.add(new Planeta( "Netuno", R.drawable.neptune));
+    // Construtor: cria a lista e preenche com planetas padrão
+    public PlanetaDAO() {
+
+        this.planetas = new ArrayList<>();
+
+        // Vetor com os nomes dos planetas
+        String[] nomes = {
+                "Mercurio", "Venus", "Terra", "Marte",
+                "Jupter", "Saturno", "Urano", "Netuno"
+        };
+
+        // Vetor com os IDs das imagens da pasta drawable
+        Integer[] imagens = {
+                R.drawable.mercury, R.drawable.venus,
+                R.drawable.earth, R.drawable.mars,
+                R.drawable.jupter, R.drawable.saturn,
+                R.drawable.uranus, R.drawable.neptune
+        };
+
+        // Loop para criar objetos planeta
+        for (int i = 0; i < nomes.length; i++) {
+            planetas.add(new Planeta(nomes[i], imagens[i]));
+        }
     }
 
-    public ArrayList<Planeta> getPlanetas(){
-        return arrayListPlanetas;
+    // Método certo: devolve a lista de planetas
+    public ArrayList<Planeta> getPlanetas() {
+        return this.planetas;
     }
 }
