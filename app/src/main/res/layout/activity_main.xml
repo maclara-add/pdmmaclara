@@ -27,7 +27,7 @@
         android:ems="10"
         android:hint="0"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/edMax"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,10 +40,11 @@
         android:ems="10"
         android:hint="100"
         android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/edMin"
-        tools:layout_editor_absoluteY="267dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/button"
@@ -60,7 +61,7 @@
         android:id="@+id/tvResultados"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="aaaaaa"
+        android:text="Número"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
